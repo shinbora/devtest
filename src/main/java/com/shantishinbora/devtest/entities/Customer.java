@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Table
 @Entity
@@ -22,12 +23,12 @@ public class Customer {
             generator = "customer_sequence"
     )
 
-    private Long id;
+    private BigInteger id;
     private String name;
     private String email;
     private String phone;
 
-    public Customer(Long id, String name, String email, String phone) {
+    public Customer(BigInteger id, String name, String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;

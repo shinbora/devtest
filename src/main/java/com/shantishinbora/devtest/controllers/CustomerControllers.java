@@ -9,13 +9,14 @@ import com.shantishinbora.devtest.repositories.CustomerRepository;
 import com.shantishinbora.devtest.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/customer")
 public class CustomerControllers {
     @Autowired
@@ -28,8 +29,9 @@ public class CustomerControllers {
     CustomerRepository customerRepository;
 
     @GetMapping
-    public String homePage(){
-        return "index";
+    public Customer findCustomerByName(Authentication authentication){
+        String name = authentication.getName();
+        return customerService.findCustomerByName(name);
     }
 
     @GetMapping("/get")
@@ -42,14 +44,16 @@ public class CustomerControllers {
         customerService.addCustomer(customer);
     }
 
-    @DeleteMapping(path="{customerId}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable("customerId") BigInteger id){
-        return customerService.deleteCustomer(id);
+    @DeleteMapping
+    public ResponseEntity<?> deleteCustomer(Authentication authentication){
+        String name = authentication.getName();
+        return customerService.deleteCustomer(name);
     }
 
-    @PutMapping(path="{customerId}")
-    public void updateCustomer(@PathVariable("customerId") BigInteger id, @RequestParam(required = false) String name, @RequestParam(required = false) String email){
-        customerService.updateCustomer(id, name, email);
+    @PutMapping
+    public void updateCustomer(Authentication authentication, @RequestParam(required = false) String email, @RequestParam(required = false) String phone){
+        String name = authentication.getName();
+        customerService.updateCustomer(name, email, phone);
     }
 
     @PostMapping("/signin")

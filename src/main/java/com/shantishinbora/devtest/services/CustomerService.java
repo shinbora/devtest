@@ -31,20 +31,25 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public ResponseEntity<?> deleteCustomer(BigInteger id){
-        boolean customerExists = customerRepository.existsById(id);
+    public Customer findCustomerByName(String name){
+        return customerRepository.findByName(name);
+    }
+
+    @Transactional
+    public ResponseEntity<?> deleteCustomer(String name){
+        boolean customerExists = customerRepository.existsByName(name);
         if(!customerExists){
-            throw new IllegalStateException("Customer ID " + id + " doesn't exist");
+            throw new IllegalStateException("Customer name " + name + " doesn't exist");
         }
-        customerRepository.deleteById(id);
+        customerRepository.deleteByName(name);
         return ResponseEntity.ok(new BaseResponse("User deleted successfully!"));
     }
 
     @Transactional
-    public void updateCustomer(BigInteger id, String name, String email){
-        Customer customerExists = customerRepository.findById(id).orElseThrow(() -> new IllegalStateException("Customer ID " + id + "doesn't exists"));
-        if(name != null && name.length() > 0 && !Objects.equals(customerExists.getName(), name)){
-            customerExists.setName(name);
+    public void updateCustomer(String name, String email, String phone){
+        Customer customerExists = customerRepository.findByName(name);
+        if(null != customerExists){
+            throw new IllegalStateException("Customer name " + name + " doesn't exists");
         }
         if(email != null && email.length() > 0 && !Objects.equals(customerExists.getEmail(), email)){
             Optional<Customer> customerOptional = customerRepository.findCustomerByEmail(customerExists.getEmail());
@@ -52,6 +57,10 @@ public class CustomerService {
                 throw new IllegalStateException("Email is already registered");
             }
             customerExists.setEmail(email);
+        }
+
+        if(null != phone && phone.length() > 0 && !Objects.equals(customerExists.getPhone(), phone)){
+            customerExists.setPhone(phone);
         }
     }
 
