@@ -1,6 +1,6 @@
 package com.shantishinbora.devtest.services;
 
-import com.shantishinbora.devtest.BaseResponse;
+import com.shantishinbora.devtest.dto.response.BaseResponse;
 import com.shantishinbora.devtest.dto.request.RegisterRequest;
 import com.shantishinbora.devtest.entities.Customer;
 import com.shantishinbora.devtest.repositories.CustomerRepository;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.shantishinbora.devtest;
+package com.shantishinbora.devtest.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

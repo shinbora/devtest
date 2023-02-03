@@ -1,4 +1,4 @@
-package com.shantishinbora.devtest;
+package com.shantishinbora.devtest.utils;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

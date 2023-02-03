@@ -1,4 +1,4 @@
-package com.shantishinbora.devtest;
+package com.shantishinbora.devtest.config;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shantishinbora.devtest.services.JwtUserDetailService;
+import com.shantishinbora.devtest.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

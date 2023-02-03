@@ -1,6 +1,6 @@
 package com.shantishinbora.devtest.controllers;
 
-import com.shantishinbora.devtest.JwtUtils;
+import com.shantishinbora.devtest.utils.JwtUtils;
 import com.shantishinbora.devtest.dto.request.LoginRequest;
 import com.shantishinbora.devtest.dto.request.RegisterRequest;
 import com.shantishinbora.devtest.dto.response.LoginResponse;

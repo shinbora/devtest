@@ -1,4 +1,4 @@
-package com.shantishinbora.devtest;
+package com.shantishinbora.devtest.config;
 
 import java.io.IOException;
 import java.io.Serializable;

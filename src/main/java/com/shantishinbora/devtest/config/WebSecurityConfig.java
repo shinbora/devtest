@@ -1,7 +1,5 @@
 package com.shantishinbora.devtest.config;
 
-import com.shantishinbora.devtest.JwtAuthenticationEntryPoint;
-import com.shantishinbora.devtest.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
