@@ -10,10 +10,8 @@ import com.shantishinbora.devtest.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -28,13 +26,13 @@ public class CustomerControllers {
     @Autowired
     CustomerRepository customerRepository;
 
-    @GetMapping
+    @GetMapping("/myProfile")
     public Customer findCustomerByName(Authentication authentication){
         String name = authentication.getName();
         return customerService.findCustomerByName(name);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/getAllCust")
     public List<Customer> getCustomer(){
         return customerService.getCustomer();
     }
@@ -44,15 +42,17 @@ public class CustomerControllers {
         customerService.addCustomer(customer);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteCustomer(Authentication authentication){
         String name = authentication.getName();
         return customerService.deleteCustomer(name);
     }
 
-    @PutMapping
-    public void updateCustomer(Authentication authentication, @RequestParam(required = false) String email, @RequestParam(required = false) String phone){
+    @PutMapping("/update")
+    public void updateCustomer(Authentication authentication, @RequestBody Customer customer){
         String name = authentication.getName();
+        String email = customer.getEmail();
+        String phone = customer.getPhone();
         customerService.updateCustomer(name, email, phone);
     }
 

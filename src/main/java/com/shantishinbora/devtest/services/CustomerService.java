@@ -48,19 +48,16 @@ public class CustomerService {
     @Transactional
     public void updateCustomer(String name, String email, String phone){
         Customer customerExists = customerRepository.findByName(name);
-        if(null != customerExists){
+        if(null == customerExists){
             throw new IllegalStateException("Customer name " + name + " doesn't exists");
-        }
-        if(email != null && email.length() > 0 && !Objects.equals(customerExists.getEmail(), email)){
-            Optional<Customer> customerOptional = customerRepository.findCustomerByEmail(customerExists.getEmail());
-            if(customerOptional.isPresent()){
-                throw new IllegalStateException("Email is already registered");
+        }else {
+            if (email != null && email.length() > 0 && !Objects.equals(customerExists.getEmail(), email)) {
+                customerExists.setEmail(email);
             }
-            customerExists.setEmail(email);
-        }
 
-        if(null != phone && phone.length() > 0 && !Objects.equals(customerExists.getPhone(), phone)){
-            customerExists.setPhone(phone);
+            if (phone != null && phone.length() > 0 && !Objects.equals(customerExists.getPhone(), phone)) {
+                customerExists.setName(name);
+            }
         }
     }
 
