@@ -3,6 +3,7 @@ package com.shantishinbora.devtest.controllers;
 import com.shantishinbora.devtest.JwtUtils;
 import com.shantishinbora.devtest.dto.request.LoginRequest;
 import com.shantishinbora.devtest.dto.request.RegisterRequest;
+import com.shantishinbora.devtest.dto.response.LoginResponse;
 import com.shantishinbora.devtest.entities.Customer;
 import com.shantishinbora.devtest.repositories.CustomerRepository;
 import com.shantishinbora.devtest.services.CustomerService;
@@ -54,7 +55,9 @@ public class CustomerControllers {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         String jwt = jwtUtils.generateJwtToken(loginRequest.getName());
-        return ResponseEntity.ok(jwt);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(jwt);
+        return ResponseEntity.ok(loginResponse);
     }
 
     @PostMapping("/signup")
